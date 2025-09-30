@@ -1,5 +1,3 @@
-package lab1;
-
 import java.util.Arrays;
 
 //TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
