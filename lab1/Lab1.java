@@ -1,18 +1,7 @@
 import java.util.Arrays;
 
-//TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
-// click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
-public class Main {
+public class Lab1 {
     public static void main(String[] args) {
-        int n = 17;
-        int c_5 = n % 5;
-        int c_7 = n % 7;
-        int c_11 = n % 11;
-
-        System.out.println("c_5 = " + c_5);
-        System.out.println("c_7 = " + c_7);
-        System.out.println("c_11 = " + c_11);
-
         int[][] a = {
                 {1, 2, 3, 4},
                 {5, 6, 7, 8},
@@ -26,8 +15,6 @@ public class Main {
                 {6, 3, 4, 1},
                 {0, 3, 5, 2}
         };
-
-        System.out.println(Arrays.deepToString(a));
 
         try {
             ChangeMatrix.matrixOperations(a, b);
