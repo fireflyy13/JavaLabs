@@ -5,7 +5,7 @@ import java.util.Scanner;
 public class Lab2 {
     public static void main(String[] args) {
         try (Scanner scan = new Scanner(System.in) ) {
-            System.out.print("Enter your text: ");
+            System.out.print("Введіть текст: ");
             String inputText = scan.nextLine();
 
             if (inputText == null || inputText.trim().isEmpty()) {
@@ -64,7 +64,7 @@ class TextManager {
                 } else {
                     StringBuffer copy = new StringBuffer();
                     copy.append(word);
-                    if (!containsWord(words, copy) && copy.length() > 0) {
+                    if (!isDuplicate(words, copy) && copy.length() > 0) {
                         words.add(copy);
                     }
                     word.setLength(0);
@@ -73,7 +73,7 @@ class TextManager {
             if (!word.isEmpty()) {
                 StringBuffer copy = new StringBuffer();
                 copy.append(word);
-                if (!containsWord(words, copy)) {
+                if (!isDuplicate(words, copy)) {
                     words.add(copy);
                 }
                 word.setLength(0);
@@ -110,16 +110,16 @@ class TextManager {
             }
         }
 
-        System.out.println("Word(s) appearing in the most sentences: ");
+        System.out.println("Слово або слова, що з'являються в більшості речень: ");
         for (StringBuffer w : maxWords) {
             System.out.print(w.toString() + " ");
         }
-        System.out.println("\nAppears in " + maxCount + " sentences");
+        System.out.println("\nЗнайдено в " + maxCount + " реченнях.");
 
 
     }
 
-    private static boolean containsWord(List<StringBuffer> list, StringBuffer word) {
+    private static boolean isDuplicate(List<StringBuffer> list, StringBuffer word) {
         for (StringBuffer w : list) {
             if (w.length() == word.length()) {
                 boolean equal = true;
