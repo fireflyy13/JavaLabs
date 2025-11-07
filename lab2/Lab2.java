@@ -5,13 +5,24 @@ import java.util.Scanner;
 public class Lab2 {
     public static void main(String[] args) {
         try (Scanner scan = new Scanner(System.in) ) {
-            System.out.print("Введіть текст: ");
-            String inputText = scan.nextLine();
+            System.out.println("Введіть текст (натисніть Enter, щоб завершити):");
+            StringBuilder sb = new StringBuilder();
+
+            while (scan.hasNextLine()) {
+                String line = scan.nextLine();
+                if (line.isBlank()) break;
+                sb.append(line).append(" ");
+            }
+
+            String inputText = sb.toString();
+
 
             if (inputText == null || inputText.trim().isEmpty()) {
                 throw new IllegalArgumentException("Ви не ввели текст!");
             }
-            StringBuffer text = new StringBuffer(inputText.replace('\n', ' '));
+            StringBuffer text = new StringBuffer(
+                    inputText.replaceAll("[\\r\\n]+", " ")
+            );
             TextManager.countMaxSentences(text);
 
         } catch (Exception error) {
@@ -26,9 +37,11 @@ class TextManager {
             throw new IllegalArgumentException("Текст не може бути null!");
         }
 
+
         if (text.isEmpty()) {
             throw new IllegalArgumentException("Текст не може бути порожнім!");
         }
+
 
         List<StringBuffer> sentences = new ArrayList<>();
         StringBuffer sentence = new StringBuffer();
@@ -38,15 +51,20 @@ class TextManager {
             if (digit != '.' && digit != '!' && digit != '?') {
                 sentence.append(digit);
             } else {
-                StringBuffer copy = new StringBuffer();
-                copy.append(sentence);
-                sentences.add(copy);
+                String content = sentence.toString().trim();
+                if (!content.isEmpty()) {
+                    sentences.add(new StringBuffer(content));
+                }
                 sentence.setLength(0);
             }
+
         }
 
         if (!sentence.isEmpty()) {
-            sentences.add(sentence);
+            String content = sentence.toString().trim();
+            if (!content.isEmpty()) {
+                sentences.add(new StringBuffer(content));
+            }
         }
 
         if (sentences.isEmpty()) {
@@ -70,18 +88,9 @@ class TextManager {
                     word.setLength(0);
                 }
             }
-            if (!word.isEmpty()) {
-                StringBuffer copy = new StringBuffer();
-                copy.append(word);
-                if (!isDuplicate(words, copy)) {
-                    words.add(copy);
-                }
-                word.setLength(0);
-            }
-            else {
+            if (words.isEmpty()) {
                 throw new IllegalArgumentException("У тексті немає жодного слова!");
             }
-
         }
 
         int maxCount = 0;
