@@ -43,6 +43,27 @@ public abstract class MusicComposition {
      */
     public abstract void play();
 
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        MusicComposition that = (MusicComposition) o;
+
+        return durationSeconds == that.durationSeconds &&
+                title.equals(that.title) &&
+                artist.equals(that.artist) &&
+                style == that.style;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = title.hashCode();
+        result = 31 * result + artist.hashCode();
+        result = 31 * result + durationSeconds;
+        result = 31 * result + style.hashCode();
+        return result;
+    }
+
     @Override
     public String toString() {
         int min = durationSeconds / 60;

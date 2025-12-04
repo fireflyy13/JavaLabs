@@ -37,7 +37,7 @@ public class MusicApp {
             System.out.println("\nАльбом після сортування за жанром:\n");
             album.printTracks();
 
-            // === Ввід діапазону тривалості користувачем ===
+            // Ввід діапазону тривалості користувачем
             int min, max;
 
             System.out.println("\nПошук композицій за тривалістю:");
